@@ -3,12 +3,12 @@
       class='fa fa-plus'></i>
     Agregar niño</button>
 
-  <div class="mt-4">
+  <div class="mt-4 table-responsive">
     <table class="table table-hover">
       <thead>
         <tr>
           <th class="text-center">Local</th>
-          <th class="text-center">Nombre de Niño</th>
+          <th class="text-center">Nombres</th>
           <th class="text-center">Fecha de Aplicación de Ingreso</th>
           <th class="text-center">Fecha de Aplicación de Egreso</th>
         </tr>
@@ -16,10 +16,33 @@
       <tbody>
         <tr *ngFor='let children of childrens'>
           <td>{{children.myLocal}}</td>
-          <td>{{children.fullName}} <br> <br>Edad: {{children.myAge}} meses</td>
+          <td>{{children.fullName}} <br> <span class="d-block mt-2">Edad: {{children.myAge}} meses</span> </td>
 
-          <td>Desde el <b>{{children.ingresoDesde}}</b> <br>hasta el <b>{{children.ingresoHasta}}</b></td>
-          <td>Programado para el <b>{{children.fechaEgreso}}</b></td>
+          <td>
+
+              Desde el <b>{{children.ingresoDesde}}</b> <br>
+              hasta el <b>{{children.ingresoHasta}}</b> <br>
+              <div class="mt-2">
+                <span class="badge text-bg-success" *ngIf="children.validIngreso">
+                  Aplicable
+                </span>
+                <span class="badge text-bg-danger" *ngIf="!children.validIngreso">
+                  No aplicable
+                </span>
+              </div>
+          </td>
+          <td>
+
+            Desde el <b>{{children.fechaEgreso}}</b> <br>
+            <div class="mt-2">
+              <span class="badge text-bg-success" *ngIf="children.validEgreso">
+                Aplicable
+              </span>
+              <span class="badge text-bg-danger" *ngIf="!children.validEgreso">
+                No aplicable
+              </span>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -56,4 +56,16 @@ export class Children {
     const egreso = moment(this.birthday).add(35,'months').format('dddd DD [de] MMMM [del] YYYY');
     return egreso;
   }
+
+  get validIngreso():boolean{
+    const desde = moment(this.created).add(19,'days');
+    const today = moment();
+    return today >= desde;
+  }
+
+  get validEgreso():boolean{
+    const desde = moment(this.birthday).add(35,'months');
+    const today = moment();
+    return today >= desde;
+  }
 }
