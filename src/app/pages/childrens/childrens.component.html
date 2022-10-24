@@ -1,0 +1,103 @@
+<div class="m-5">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertarNinio"> <i
+      class='fa fa-plus'></i>
+    Agregar niño</button>
+
+  <div class="mt-4">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">Local</th>
+          <th class="text-center">Nombre de Niño</th>
+          <th class="text-center">Fecha de Aplicación de Ingreso</th>
+          <th class="text-center">Fecha de Aplicación de Egreso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let children of childrens'>
+          <td>{{children.myLocal}}</td>
+          <td>{{children.fullName}} <br> <br>Edad: {{children.myAge}} meses</td>
+
+          <td>Desde el <b>{{children.ingresoDesde}}</b> <br>hasta el <b>{{children.ingresoHasta}}</b></td>
+          <td>Programado para el <b>{{children.fechaEgreso}}</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="modal fade" id="insertarNinio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="insertarNinioLabel">Agregar Niño</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form (submit)="saveChildren()" [formGroup]="childrenForm">
+        <div class="modal-body">
+
+          <div class="mb-3 row">
+            <label for="input-fecha-ingreso" class="col-sm-3 col-form-label">F. de Ingreso</label>
+            <div class="col-sm-9">
+              <input type="date" class="form-control" id="input-fecha-ingreso" formControlName="created">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-3 col-form-label">Local</label>
+            <div class="col-sm-9">
+              <select class="form-select" aria-label="Default select example" formControlName="local">
+                <option value="1">Local comunal "La Joya"</option>
+                <option value="2">Las Buganvilas</option>
+                <option value="3">Las Buganvilas II</option>
+                <option value="4">Residencial Jóvenes Unidos</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="input-documento" class="col-sm-3 col-form-label">DNI</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-documento" maxlength="10" formControlName="documentNumber" placeholder="Ingrese número de DNI">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="input-apellido-paterno" class="col-sm-3 col-form-label">Apellido Paterno</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-apellido-paterno" formControlName="fatherLastname" placeholder="Ingrese apellido paterno">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="input-apellido-materno" class="col-sm-3 col-form-label">Apellido Materno</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-apellido-materno" formControlName="motherLastname" placeholder="Ingrese apellido materno">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="input-nombres" class="col-sm-3 col-form-label">Nombres</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="input-nombres" formControlName="names" placeholder="Ingrese nombres">
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="input-fecha-nacimiento" class="col-sm-3 col-form-label">F. de Nacimiento</label>
+            <div class="col-sm-9">
+              <input type="date" class="form-control" id="input-fecha-nacimiento" formControlName="birthday">
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <input type="submit" class="btn btn-primary" value="Guardar niño" [disabled]="childrenForm.invalid">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

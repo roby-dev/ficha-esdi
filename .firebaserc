@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fichasesdi": {
+      "hosting": {
+        "esdi-app": [
+          "fichasesdi"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fichasesdi"
+  }
+}
