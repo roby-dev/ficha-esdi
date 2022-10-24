@@ -3,49 +3,71 @@
       class='fa fa-plus'></i>
     Agregar niño</button>
 
-  <div class="mt-4 table-responsive">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th class="text-center">Local</th>
-          <th class="text-center">Nombres</th>
-          <th class="text-center">Fecha de Aplicación de Ingreso</th>
-          <th class="text-center">Fecha de Aplicación de Egreso</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor='let children of childrens'>
-          <td>{{children.myLocal}}</td>
-          <td>{{children.fullName}} <br> <span class="d-block mt-2">Edad: {{children.myAge}} meses</span> </td>
+  <div class="mt-4 table-responsive" *ngIf="childrens">
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese datos a buscar" #input>
+    </mat-form-field>
 
-          <td>
-
-              Desde el <b>{{children.ingresoDesde}}</b> <br>
-              hasta el <b>{{children.ingresoHasta}}</b> <br>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>    
+        <!-- ID Column -->
+        <ng-container matColumnDef="local">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Local </th>
+          <td mat-cell *matCellDef="let row"> {{row.myLocal}} </td>
+        </ng-container>
+    
+        <!-- Progress Column -->
+        <ng-container matColumnDef="nombres">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+          <td mat-cell *matCellDef="let row"> {{row.fullName}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="fecha_apli">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Aplicación de Ingreso </th>
+          <td mat-cell *matCellDef="let row">
+            Desde el <b>{{row.ingresoDesde}}</b> <br>
+              hasta el <b>{{row.ingresoHasta}}</b> <br>
               <div class="mt-2">
-                <span class="badge text-bg-success" *ngIf="children.validIngreso">
+                <span class="badge text-bg-success" *ngIf="row.validIngreso">
                   Aplicable
                 </span>
-                <span class="badge text-bg-danger" *ngIf="!children.validIngreso">
+                <span class="badge text-bg-danger" *ngIf="!row.validIngreso">
                   No aplicable
                 </span>
               </div>
           </td>
-          <td>
-
-            Desde el <b>{{children.fechaEgreso}}</b> <br>
+        </ng-container>
+    
+        <!-- Fruit Column -->
+        <ng-container matColumnDef="fecha_egre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Aplicación de Egreso
+          </th>
+          <td mat-cell *matCellDef="let row"> 
+            Desde el <b>{{row.fechaEgreso}}</b> <br>
             <div class="mt-2">
-              <span class="badge text-bg-success" *ngIf="children.validEgreso">
+              <span class="badge text-bg-success" *ngIf="row.validEgreso">
                 Aplicable
               </span>
-              <span class="badge text-bg-danger" *ngIf="!children.validEgreso">
+              <span class="badge text-bg-danger" *ngIf="!row.validEgreso">
                 No aplicable
               </span>
             </div>
           </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No se encontraron registros "{{input.value}}"</td>
         </tr>
-      </tbody>
-    </table>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>   
   </div>
 </div>
 

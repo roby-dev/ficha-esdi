@@ -6,21 +6,34 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import { ChildrensComponent } from './childrens/childrens.component';
 import { PagesComponent } from './pages.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatSortModule} from '@angular/material/sort';
+
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+
 
 @NgModule({
   declarations: [ChildrensComponent, PagesComponent],
-  imports: [
-    BrowserModule,
+  imports: [  
     CommonModule,
+    BrowserAnimationsModule,  
     FormsModule,
     ReactiveFormsModule,
-    RouterModule,
+    RouterModule,   
+    MatTableModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideDatabase(() => getDatabase())
+    provideDatabase(() => getDatabase()),
   ],
-  exports:[ChildrensComponent,PagesComponent]
+  exports:[ChildrensComponent,PagesComponent],  
 })
 export class PagesModule { }

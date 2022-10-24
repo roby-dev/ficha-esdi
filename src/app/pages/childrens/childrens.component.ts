@@ -1,8 +1,12 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit,ViewChild,ElementRef, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChildrenService } from './services/children.service';
 import { ref, getDatabase, onValue } from '@angular/fire/database';
 import { Children } from './models/children.modal';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+
 
 declare const bootstrap: any;
 
@@ -14,6 +18,12 @@ const numberRegEx = /\-?\d*\.?\d{1,2}/;
   styleUrls: ['./childrens.component.scss']
 })
 export class ChildrensComponent implements OnInit, AfterViewInit {
+  dataSource!: MatTableDataSource<any>;
+ 
+  @ViewChild(MatPaginator,{static:false}) paginator!: MatPaginator;
+  @ViewChild(MatSort,{static:false}) sort!: MatSort;
+
+  displayedColumns: string[] = ['local', 'nombres', 'fecha_apli', 'fecha_egre'];
 
   public childrens: any[] = [];
   public childrenForm!: FormGroup;
@@ -22,7 +32,8 @@ export class ChildrensComponent implements OnInit, AfterViewInit {
 
   constructor(
     private fb: FormBuilder,
-    private childrenService: ChildrenService
+    private childrenService: ChildrenService,
+    private changeDetector: ChangeDetectorRef
   ) {
     this.initChildrenForm();
   }
@@ -43,7 +54,7 @@ export class ChildrensComponent implements OnInit, AfterViewInit {
     const modal = document.getElementById('insertarNinio')!;
     modal.addEventListener('hidden.bs.modal', () => {
       this.initChildrenForm();
-    })
+    });   
   }
 
   ngOnInit(): void {
@@ -53,10 +64,13 @@ export class ChildrensComponent implements OnInit, AfterViewInit {
       const data = snapshot.val();
       if (!data) return;
       Object.keys(data).forEach(key => {
-
         this.childrens.push(Children.newChildren(data[key as keyof typeof data]));
       })
       console.log(this.childrens);
+      this.dataSource = new MatTableDataSource(this.childrens);
+      this.changeDetector.detectChanges();
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 
@@ -70,6 +84,15 @@ export class ChildrensComponent implements OnInit, AfterViewInit {
       const myModal = bootstrap.Modal.getInstance(modal);
       myModal.hide();
     });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 }
