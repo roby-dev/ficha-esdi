@@ -9,10 +9,10 @@ export const environment = {
     messagingSenderId: '462903599668',
   },
   locals:{
-    '1':'La Joya',
-    '2':'Las Buganvilas',
-    '3':'Las Buganvilas II',
-    '4':'Residencial Jóvenes Unidos'
+    '1':'LA JOYA',
+    '2':'LAS BUGANVILLAS',
+    '3':'LAS BUGANVILLAS II',
+    '4':'RESIDENCIAL JÓVENES UNIDOS'
   },
   production: true
 };
