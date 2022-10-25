@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Agregar niño</h1>
+<div mat-dialog-content class="dialog-content">
+    <form [formGroup]="childrenForm">     
+
+          <mat-form-field appearance="standard">
+            <mat-label>Fecha de Ingreso</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="created">         
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker ></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard">
+            <mat-label>Local</mat-label>
+            <mat-select formControlName="local" name="food">           
+              <mat-option *ngFor="let local of locals | keyvalue" [value]="local.key">
+                {{local.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>         
+
+          <mat-form-field appearance="standard">
+            <mat-label>Documento de Identidad</mat-label>
+            <input matInput maxlength="11" placeholder="Ingrese su documento de identidad" formControlName="documentNumber">         
+          </mat-form-field>
+        
+          <mat-form-field appearance="standard">
+            <mat-label>Nombres</mat-label>
+            <input matInput placeholder="Ingrese nombres" formControlName="names">         
+          </mat-form-field>   
+          
+          <mat-form-field appearance="standard">
+            <mat-label>Apellidos</mat-label>
+            <input matInput placeholder="Ingrese apellidos" formControlName="lastname">         
+          </mat-form-field>         
+         
+          <mat-form-field appearance="standard">
+            <mat-label>Fecha de Nacimiento</mat-label>
+            <input matInput [matDatepicker]="pickerBirthday" formControlName="birthday">         
+            <mat-datepicker-toggle matSuffix [for]="pickerBirthday"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #pickerBirthday ></mat-datepicker>
+          </mat-form-field>
+
+      </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="default" mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="saveChildren()" [disabled]="childrenForm.invalid">Agregar niño</button>
+  
+</div>

@@ -1,39 +1,41 @@
-<div class="m-5">
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertarNinio"> <i
-      class='fa fa-plus'></i>
-    Agregar niño</button>
-
-  <div class="mt-4 table-responsive" *ngIf="childrens">
+<mat-card>
+  <mat-card-title>Ficha niños</mat-card-title>
+  <!-- <mat-card-subtitle>Start</mat-card-subtitle> -->
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="openChildrenDialog()">Agregar Niño</button>    
+  </mat-card-actions>
+  <mat-card-content>
     <mat-form-field appearance="standard">
-      <mat-label>Filter</mat-label>
+      <mat-label>Búsqueda</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese datos a buscar" #input>
     </mat-form-field>
 
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort>    
-        <!-- ID Column -->
+      <table mat-table [dataSource]="dataSource" matSort >    
+        <!-- ID Column -->     
+    
+        <!-- Progress Column -->
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos y Nombres </th>
+          <td mat-cell *matCellDef="let row"> {{row.fullName}} <br> <span class='badge badge-secondary'>{{row.myAge}} meses</span></td>
+        </ng-container>
+
         <ng-container matColumnDef="local">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Local </th>
           <td mat-cell *matCellDef="let row"> {{row.myLocal}} </td>
-        </ng-container>
-    
-        <!-- Progress Column -->
-        <ng-container matColumnDef="nombres">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
-          <td mat-cell *matCellDef="let row"> {{row.fullName}} </td>
         </ng-container>
     
         <!-- Name Column -->
         <ng-container matColumnDef="fecha_apli">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Aplicación de Ingreso </th>
           <td mat-cell *matCellDef="let row">
-            Desde el <b>{{row.ingresoDesde}}</b> <br>
-              hasta el <b>{{row.ingresoHasta}}</b> <br>
+            Desde: <i>{{row.ingresoDesde | uppercase}}</i> <br>
+              Hasta: <i>{{row.ingresoHasta | uppercase}}</i> <br>
               <div class="mt-2">
-                <span class="badge text-bg-success" *ngIf="row.validIngreso">
+                <span class="badge badge-primary" *ngIf="row.validIngreso">
                   Aplicable
                 </span>
-                <span class="badge text-bg-danger" *ngIf="!row.validIngreso">
+                <span class="badge badge-danger" *ngIf="!row.validIngreso">
                   No aplicable
                 </span>
               </div>
@@ -45,12 +47,12 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Aplicación de Egreso
           </th>
           <td mat-cell *matCellDef="let row"> 
-            Desde el <b>{{row.fechaEgreso}}</b> <br>
+            Desde: <i>{{row.fechaEgreso | uppercase}}</i> <br>
             <div class="mt-2">
-              <span class="badge text-bg-success" *ngIf="row.validEgreso">
+              <span class="badge badge-primary" *ngIf="row.validEgreso">
                 Aplicable
               </span>
-              <span class="badge text-bg-danger" *ngIf="!row.validEgreso">
+              <span class="badge badge-danger" *ngIf="!row.validEgreso">
                 No aplicable
               </span>
             </div>
@@ -68,81 +70,5 @@
     
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     </div>   
-  </div>
-</div>
-
-
-<div class="modal fade" id="insertarNinio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="insertarNinioLabel">Agregar Niño</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <form (submit)="saveChildren()" [formGroup]="childrenForm">
-        <div class="modal-body">
-
-          <div class="mb-3 row">
-            <label for="input-fecha-ingreso" class="col-sm-3 col-form-label">F. de Ingreso</label>
-            <div class="col-sm-9">
-              <input type="date" class="form-control" id="input-fecha-ingreso" formControlName="created">
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label for="staticEmail" class="col-sm-3 col-form-label">Local</label>
-            <div class="col-sm-9">
-              <select class="form-select" aria-label="Default select example" formControlName="local">
-                <option value="1">Local comunal "La Joya"</option>
-                <option value="2">Las Buganvilas</option>
-                <option value="3">Las Buganvilas II</option>
-                <option value="4">Residencial Jóvenes Unidos</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label for="input-documento" class="col-sm-3 col-form-label">DNI</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-documento" maxlength="10" formControlName="documentNumber" placeholder="Ingrese número de DNI">
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label for="input-apellido-paterno" class="col-sm-3 col-form-label">Apellido Paterno</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-apellido-paterno" formControlName="fatherLastname" placeholder="Ingrese apellido paterno">
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label for="input-apellido-materno" class="col-sm-3 col-form-label">Apellido Materno</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-apellido-materno" formControlName="motherLastname" placeholder="Ingrese apellido materno">
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label for="input-nombres" class="col-sm-3 col-form-label">Nombres</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" id="input-nombres" formControlName="names" placeholder="Ingrese nombres">
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label for="input-fecha-nacimiento" class="col-sm-3 col-form-label">F. de Nacimiento</label>
-            <div class="col-sm-9">
-              <input type="date" class="form-control" id="input-fecha-nacimiento" formControlName="birthday">
-            </div>
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <input type="submit" class="btn btn-primary" value="Guardar niño" [disabled]="childrenForm.invalid">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>

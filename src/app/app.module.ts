@@ -5,6 +5,10 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -13,6 +17,8 @@ import { BrowserModule } from '@angular/platform-browser';
     AppRoutingModule,
     PagesModule,
     BrowserModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideDatabase(() => getDatabase()),
   ],
   providers: [],
   bootstrap: [AppComponent]

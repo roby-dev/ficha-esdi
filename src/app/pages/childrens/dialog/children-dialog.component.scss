@@ -1,0 +1,16 @@
+form{
+    display: flex;
+    flex-direction: column;     
+  }
+
+  .dialog-content{
+    min-width: 50vw;
+  }
+
+  
+@media only screen and (max-width: 560px) {
+    /* For mobile phones: */
+    .dialog-content{
+        min-width: 68vw;
+      }
+  }

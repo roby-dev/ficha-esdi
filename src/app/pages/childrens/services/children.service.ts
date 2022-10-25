@@ -4,6 +4,7 @@ import { Database,set,ref,update,getDatabase,onValue } from '@angular/fire/datab
 import { FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,17 +19,15 @@ export class ChildrenService {
   saveChildren(formData:FormGroup){
     const local = String(formData.get('local')!.value);
     const documentNumber = String(formData.get('documentNumber')!.value);
-    const fatherLastname = String(formData.get('fatherLastname')!.value);
-    const motherLastname = String(formData.get('motherLastname')!.value);
-    const names = String(formData.get('names')!.value);
+    const lastname = String(formData.get('lastname')!.value).trim().toUpperCase();    
+    const names = String(formData.get('names')!.value).trim().toUpperCase();
     const birthday = String(formData.get('birthday')!.value);
     const created = moment(formData.get('created')!.value).format('YYYY-MM-DD');
 
     return set(ref(this.db,`childrens/children-${documentNumber}`),{
       local,
       documentNumber,
-      fatherLastname,
-      motherLastname,
+      lastname,
       names,
       birthday,
       created

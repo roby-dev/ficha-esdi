@@ -13,7 +13,7 @@ export const environment = {
     messagingSenderId: '462903599668',
   },
   locals:{
-    '1':'Local comunal "La Joya"',
+    '1':'La Joya',
     '2':'Las Buganvilas',
     '3':'Las Buganvilas II',
     '4':'Residencial Jóvenes Unidos'

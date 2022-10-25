@@ -7,8 +7,7 @@ export class Children {
     return new Children(
       children['local'],
       children['documentNumber'],
-      children['fatherLastname'],
-      children['motherLastname'],
+      children['lastname'],
       children['names'],
       children['birthday'],
       children['created'],
@@ -18,15 +17,14 @@ export class Children {
   constructor(
     public local:string,
     public documentNumber:string,
-    public fatherLastname:string,
-    public motherLastname:string,
+    public lastname:string,
     public names:string,
     public birthday:string,
     public created:string,
   ){}
 
   get fullName(){
-    return `${this.fatherLastname} ${this.motherLastname}, ${this.names}`
+    return `${this.lastname}, ${this.names}`
   }
 
   get myLocal(){
