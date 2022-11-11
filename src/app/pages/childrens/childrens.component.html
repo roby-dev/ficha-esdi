@@ -8,10 +8,13 @@
   </div>
  
   <mat-card-content>
-    <mat-form-field appearance="standard">
+    <mat-form-field appearance="standard" class="search-input">
       <mat-label>Búsqueda</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese datos a buscar" #input>
     </mat-form-field>
+
+    
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 
     <div class="mat-elevation-z8">
       <table mat-table matSort [dataSource]="dataSource" matSort >    
@@ -22,7 +25,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
           <td mat-cell *matCellDef="let row">
 
-            <mat-card>
+            <div class="card-container">
               <mat-card-title>
                 {{row.fullName}}
               </mat-card-title>
@@ -38,7 +41,7 @@
                   <span class="badge badge-danger" *ngIf="!row.validIngreso">
                     No aplicable
                   </span> &nbsp;
-                  (desde el {{row.ingresoDesde }} hasta {{row.ingresoHasta}})</p>
+                  (desde el {{row.ingresoDesde }} - hasta {{row.ingresoHasta}})</p>
                 <p>Ficha de egreso: &nbsp;
                   <span class="badge badge-primary" *ngIf="row.validEgreso">
                     Aplicable
@@ -48,7 +51,7 @@
                   </span> &nbsp;
                   (desde el {{row.fechaEgreso}})</p>
               </mat-card-content>
-            </mat-card>
+            </div>
 
           </td>
         </ng-container>
@@ -64,7 +67,6 @@
         </tr>
       </table>
     
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     </div>   
   </mat-card-content>
 </mat-card>

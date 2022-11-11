@@ -34,3 +34,15 @@ table {
   .card-title-container{
     padding: 1em;
   }
+
+  .card-container{
+    padding: 1em;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .search-input{
+    .mat-form-field-wrapper{
+      padding-bottom: 0px;
+    }
+  }

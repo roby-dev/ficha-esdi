@@ -59,6 +59,7 @@ export class ChildrensComponent implements OnInit {
       console.log(this.childrens);
       this.dataSource = new MatTableDataSource(this.childrens);
       this.changeDetector.detectChanges();
+      this.paginator._intl.itemsPerPageLabel = "Registros por página";
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
