@@ -32,24 +32,38 @@
               <mat-card-subtitle>
                 {{row.myLocal}}
               </mat-card-subtitle>
-              <mat-card-content>
-                <p>Edad: {{row.myAge}} meses</p>
-                <p>Ficha de ingreso: &nbsp;
-                  <span class="badge badge-primary" *ngIf="row.validIngreso">
+              <mat-card-content class="description-container">
+                <div class="d-flex row">
+                  <div>Edad:</div>
+                  <div>{{row.myAge}} meses</div>
+                </div>
+                <div class="d-flex row">
+                  <div>Ficha de ingreso:</div>
+                  <div><span class="badge badge-primary" *ngIf="row.validIngreso">
                     Aplicable
                   </span>
                   <span class="badge badge-danger" *ngIf="!row.validIngreso">
                     No aplicable
                   </span> &nbsp;
-                  (desde el {{row.ingresoDesde }} - hasta {{row.ingresoHasta}})</p>
-                <p>Ficha de egreso: &nbsp;
-                  <span class="badge badge-primary" *ngIf="row.validEgreso">
-                    Aplicable
-                  </span>
-                  <span class="badge badge-danger" *ngIf="!row.validEgreso">
-                    No aplicable
-                  </span> &nbsp;
-                  (desde el {{row.fechaEgreso}})</p>
+                  (desde el {{row.ingresoDesde }} - hasta {{row.ingresoHasta}})</div>
+                </div>
+
+                <div class="d-flex row">
+                  <div>
+                    Ficha de egreso:
+                  </div>
+                  <div>
+                    <span class="badge badge-primary" *ngIf="row.validEgreso">
+                      Aplicable
+                    </span>
+                    <span class="badge badge-danger" *ngIf="!row.validEgreso">
+                      No aplicable
+                    </span> &nbsp;
+                    (desde el {{row.fechaEgreso}})
+                  </div>
+                </div>
+               
+             
               </mat-card-content>
             </div>
 

@@ -47,3 +47,16 @@ body{
 
 
 @import './app/directives/mat-table-responsive.directive';
+
+
+.d-flex{
+    display: flex;
+}
+
+.row{
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: start;
+    margin-bottom: 10px;
+}

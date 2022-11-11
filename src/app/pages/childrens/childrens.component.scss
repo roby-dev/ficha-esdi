@@ -12,13 +12,9 @@ table {
     padding: 1em;
   }
 
-  
-
-  
-  .mat-cell::before{
-    font-weight: bold;
+  .mat-card-actions{
+    margin-bottom: 0px;
   }
-
 
   table td{
     padding: 1em;
@@ -26,13 +22,49 @@ table {
   }
 
   @media (max-width: 768px) {
+
+    
+    .row{      
+      justify-content: space-between;
+      gap:1px;
+    }
+
     thead{
       display: none;
     }
+    
+    .mat-card{
+      padding: 0;
+      margin: 0;
+    }
+
+    .search-input{
+      padding: 2em;
+      padding-top: 0;
+      width: max-content;
+    }
+    
+    .card-title-container{
+      padding-left: 2em !important;
+      padding-right: 2em !important;
+      padding-top: 2em !important;
+
+      .mat-card-actions{     
+        button{
+          width: 100%;
+          padding: .4em;
+          font-size: 20px;
+        }
+      }      
+    }  
   }
 
   .card-title-container{
     padding: 1em;
+
+    .mat-card-title{
+      font-size: 30px;
+    }
   }
 
   .card-container{
@@ -46,3 +78,4 @@ table {
       padding-bottom: 0px;
     }
   }
+
