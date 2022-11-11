@@ -1,9 +1,12 @@
 <mat-card>
-  <mat-card-title>Ficha niños</mat-card-title>
-  <!-- <mat-card-subtitle>Start</mat-card-subtitle> -->
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="openChildrenDialog()">Agregar Niño</button>    
-  </mat-card-actions>
+  <div class="card-title-container">
+    <mat-card-title>Ficha niños</mat-card-title>
+    <!-- <mat-card-subtitle>Start</mat-card-subtitle> -->
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="openChildrenDialog()">Agregar Niño</button>    
+    </mat-card-actions>
+  </div>
+ 
   <mat-card-content>
     <mat-form-field appearance="standard">
       <mat-label>Búsqueda</mat-label>
@@ -11,53 +14,46 @@
     </mat-form-field>
 
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort >    
+      <table mat-table matSort [dataSource]="dataSource" matSort >    
         <!-- ID Column -->     
     
         <!-- Progress Column -->
         <ng-container matColumnDef="fullName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos y Nombres </th>
-          <td mat-cell *matCellDef="let row"> {{row.fullName}} <br> <span class='badge badge-secondary'>{{row.myAge}} meses</span></td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+          <td mat-cell *matCellDef="let row">
+
+            <mat-card>
+              <mat-card-title>
+                {{row.fullName}}
+              </mat-card-title>
+              <mat-card-subtitle>
+                {{row.myLocal}}
+              </mat-card-subtitle>
+              <mat-card-content>
+                <p>Edad: {{row.myAge}} meses</p>
+                <p>Ficha de ingreso: &nbsp;
+                  <span class="badge badge-primary" *ngIf="row.validIngreso">
+                    Aplicable
+                  </span>
+                  <span class="badge badge-danger" *ngIf="!row.validIngreso">
+                    No aplicable
+                  </span> &nbsp;
+                  (desde el {{row.ingresoDesde }} hasta {{row.ingresoHasta}})</p>
+                <p>Ficha de egreso: &nbsp;
+                  <span class="badge badge-primary" *ngIf="row.validEgreso">
+                    Aplicable
+                  </span>
+                  <span class="badge badge-danger" *ngIf="!row.validEgreso">
+                    No aplicable
+                  </span> &nbsp;
+                  (desde el {{row.fechaEgreso}})</p>
+              </mat-card-content>
+            </mat-card>
+
+          </td>
         </ng-container>
 
-        <ng-container matColumnDef="local">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Local </th>
-          <td mat-cell *matCellDef="let row"> {{row.myLocal}} </td>
-        </ng-container>
-    
-        <!-- Name Column -->
-        <ng-container matColumnDef="fecha_apli">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Aplicación de Ingreso </th>
-          <td mat-cell *matCellDef="let row">
-            Desde: <i>{{row.ingresoDesde | uppercase}}</i> <br>
-              Hasta: <i>{{row.ingresoHasta | uppercase}}</i> <br>
-              <div class="mt-2">
-                <span class="badge badge-primary" *ngIf="row.validIngreso">
-                  Aplicable
-                </span>
-                <span class="badge badge-danger" *ngIf="!row.validIngreso">
-                  No aplicable
-                </span>
-              </div>
-          </td>
-        </ng-container>
-    
-        <!-- Fruit Column -->
-        <ng-container matColumnDef="fecha_egre">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Aplicación de Egreso
-          </th>
-          <td mat-cell *matCellDef="let row"> 
-            Desde: <i>{{row.fechaEgreso | uppercase}}</i> <br>
-            <div class="mt-2">
-              <span class="badge badge-primary" *ngIf="row.validEgreso">
-                Aplicable
-              </span>
-              <span class="badge badge-danger" *ngIf="!row.validEgreso">
-                No aplicable
-              </span>
-            </div>
-          </td>
-        </ng-container>
+        
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

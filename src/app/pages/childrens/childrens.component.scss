@@ -12,10 +12,25 @@ table {
     padding: 1em;
   }
 
+  
+
+  
+  .mat-cell::before{
+    font-weight: bold;
+  }
+
+
   table td{
-    padding-top: .7em;
-    padding-bottom: .7em;
+    padding: 1em;
     line-height: 1.6em;
   }
 
-  
+  @media (max-width: 768px) {
+    thead{
+      display: none;
+    }
+  }
+
+  .card-title-container{
+    padding: 1em;
+  }

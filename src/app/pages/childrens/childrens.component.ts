@@ -31,7 +31,7 @@ export class ChildrensComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
-  displayedColumns: string[] = ['fullName', 'local', 'fecha_apli', 'fecha_egre'];
+  displayedColumns: string[] = ['fullName'];
   public childrens: any[] = [];
   db = getDatabase();
   private newChildrenSub!:Subscription;

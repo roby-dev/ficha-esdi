@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import {A11yModule} from '@angular/cdk/a11y';
+
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
@@ -21,10 +23,13 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatTableResponsiveModule } from '../directives/mat-table-responsive.module';
 
 @NgModule({
   declarations: [ChildrensComponent, PagesComponent,ChildrenDialogComponent],
   imports: [  
+    MatTableResponsiveModule,
+    A11yModule,
     CommonModule,
     BrowserAnimationsModule,  
     FormsModule,
