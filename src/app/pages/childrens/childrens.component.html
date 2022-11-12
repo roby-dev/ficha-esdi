@@ -3,23 +3,23 @@
     <mat-card-title>Ficha niños</mat-card-title>
     <!-- <mat-card-subtitle>Start</mat-card-subtitle> -->
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="openChildrenDialog()">Agregar Niño</button>    
+      <button mat-raised-button color="primary" (click)="openChildrenDialog()">Agregar Niño</button>
     </mat-card-actions>
   </div>
- 
+
   <mat-card-content>
     <mat-form-field appearance="standard" class="search-input">
       <mat-label>Búsqueda</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese datos a buscar" #input>
     </mat-form-field>
 
-    
+
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 
     <div class="mat-elevation-z8">
-      <table mat-table matSort [dataSource]="dataSource" matSort >    
-        <!-- ID Column -->     
-    
+      <table mat-table matSort [dataSource]="dataSource" matSort>
+        <!-- ID Column -->
+
         <!-- Progress Column -->
         <ng-container matColumnDef="fullName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
@@ -39,13 +39,18 @@
                 </div>
                 <div class="d-flex row">
                   <div>Ficha de ingreso:</div>
-                  <div><span class="badge badge-primary" *ngIf="row.validIngreso">
-                    Aplicable
-                  </span>
-                  <span class="badge badge-danger" *ngIf="!row.validIngreso">
-                    No aplicable
-                  </span> &nbsp;
-                  (desde el {{row.ingresoDesde }} - hasta {{row.ingresoHasta}})</div>
+                  <div>
+                    <span class="badge badge-primary" *ngIf="row.validIngreso">
+                      Aplicable
+                    </span>
+
+                    <span class="badge badge-danger" *ngIf="!row.validIngreso">
+                      No aplicable
+                    </span>
+                  </div>
+                  <div>
+                    (desde el {{row.ingresoDesde }} - hasta {{row.ingresoHasta}})
+                  </div>
                 </div>
 
                 <div class="d-flex row">
@@ -59,28 +64,30 @@
                     <span class="badge badge-danger" *ngIf="!row.validEgreso">
                       No aplicable
                     </span> &nbsp;
+                  </div>
+                  <div>
                     (desde el {{row.fechaEgreso}})
                   </div>
                 </div>
-               
-             
+
+
               </mat-card-content>
             </div>
 
           </td>
         </ng-container>
 
-        
-    
+
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
+
         <!-- Row shown when there is no matching data. -->
         <tr class="mat-row" *matNoDataRow>
           <td class="mat-cell" colspan="4">No se encontraron registros "{{input.value}}"</td>
         </tr>
       </table>
-    
-    </div>   
+
+    </div>
   </mat-card-content>
 </mat-card>
