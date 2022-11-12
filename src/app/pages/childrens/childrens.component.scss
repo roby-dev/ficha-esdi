@@ -79,3 +79,11 @@ table {
     }
   }
 
+  .mat-row{
+    transition: all 250ms;
+  }
+
+  .mat-row:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
