@@ -4,7 +4,7 @@
 
           <mat-form-field appearance="standard">
             <mat-label>Fecha de Ingreso</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="created">         
+            <input matInput [matDatepicker]="picker" formControlName="created" (change)="view(picker)">         
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker touchUi #picker ></mat-datepicker>
           </mat-form-field>
@@ -44,6 +44,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button color="default" mat-dialog-close>Cancelar</button>
-  <button mat-raised-button color="primary" (click)="saveChildren()" [disabled]="childrenForm.invalid">Agregar niño</button>
+  <button id="button-confirm-dialog" mat-raised-button color="primary" (click)="saveChildren()" [disabled]="childrenForm.invalid">Agregar niño</button>
   
 </div>

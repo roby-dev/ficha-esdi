@@ -21,6 +21,7 @@ export class Children {
     public names:string,
     public birthday:string,
     public created:string,
+    public id?:string,
   ){}
 
   get fullName(){
@@ -66,4 +67,15 @@ export class Children {
     const today = moment();
     return today >= desde;
   }
+
+  get birthdayFormatted():string{
+    if(this.birthday.length===0) return '2009-01-01';
+    return moment(this.birthday).format('yyyy-MM-DD[T00:00:00]');
+  }
+
+  get createdFormatted():string{
+    if(this.created.length===0) return '';
+    return moment(this.created).format('yyyy-MM-DD[T00:00:00]');
+  }
+
 }

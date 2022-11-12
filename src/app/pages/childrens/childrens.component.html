@@ -34,6 +34,10 @@
               </mat-card-subtitle>
               <mat-card-content class="description-container">
                 <div class="d-flex row">
+                  <div>DNI:</div>
+                  <div>{{row.documentNumber}}</div>
+                </div>
+                <div class="d-flex row">
                   <div>Edad:</div>
                   <div>{{row.myAge}} meses</div>
                 </div>
@@ -44,7 +48,7 @@
                       Aplicable
                     </span>
 
-                    <span class="badge badge-danger" *ngIf="!row.validIngreso">
+                    <span class="badge badge-default" *ngIf="!row.validIngreso">
                       No aplicable
                     </span>
                   </div>
@@ -61,7 +65,7 @@
                     <span class="badge badge-primary" *ngIf="row.validEgreso">
                       Aplicable
                     </span>
-                    <span class="badge badge-danger" *ngIf="!row.validEgreso">
+                    <span class="badge badge-default" *ngIf="!row.validEgreso">
                       No aplicable
                     </span> &nbsp;
                   </div>
@@ -69,8 +73,10 @@
                     (desde el {{row.fechaEgreso}})
                   </div>
                 </div>
-
-
+                <div class="d-flex row justify-content-start mt-3">
+                  <button mat-raised-button color="primary" (click)="openModal(row)">Editar</button>
+                  <button mat-raised-button color="warn" (click)="deleteChildren(row.id)">Eliminar</button>
+                </div>
               </mat-card-content>
             </div>
 
