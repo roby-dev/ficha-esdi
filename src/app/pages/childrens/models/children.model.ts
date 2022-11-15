@@ -58,8 +58,9 @@ export class Children {
 
   get validIngreso():boolean{
     const desde = moment(this.created).add(19,'days');
+    const hasta = moment(this.created).add(40,'days');
     const today = moment();
-    return today >= desde;
+    return today >= desde && today <= hasta;
   }
 
   get validEgreso():boolean{
